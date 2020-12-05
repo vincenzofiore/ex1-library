@@ -2,4 +2,4 @@
 progetto biblioteca
 
 # test joke
-http://localhost:8080/booklibrary/core/VINCENZO/status
+http://localhost:8080/booklibrary/core/TUONOME/status
