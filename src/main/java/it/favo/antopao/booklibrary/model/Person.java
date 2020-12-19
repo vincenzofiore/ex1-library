@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.favo.antopao.booklibrary.entity;
+package it.favo.antopao.booklibrary.model;
 
 /**
  * @author A. Favorito on 18-12-2020
