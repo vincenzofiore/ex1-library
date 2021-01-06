@@ -1,4 +1,4 @@
-# Book Library ![Java CI](https://github.com/vincenzofiore/ex1-library/workflows/Java%20CI/badge.svg?branch=develop)
+# Book Library ![Java CI](https://github.com/vincenzofiore/ex1-library/workflows/Java%20CI/badge.svg?branch=main)
 Applicazione che consente di gestire una biblioteca distribuita e condivisa tra un gruppo di amici.
 
 # OpenAPI
