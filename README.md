@@ -1,4 +1,4 @@
-# Book Library
+# Book Library ![Java CI](https://github.com/vincenzofiore/ex1-library/workflows/Java%20CI/badge.svg?branch=develop)
 Applicazione che consente di gestire una biblioteca distribuita e condivisa tra un gruppo di amici.
 
 # OpenAPI
@@ -25,4 +25,3 @@ Now you can use the Bearer:
 `curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMCIsImV4cCI6MTYxMDQ3NDk1N30.p1a3HmThHsgfTdo9XIPOULqB4PL9Xxc27W54pAmGSJb_rbtTp7qWYDAX_ltY7_IAbAYNu_aF5qcKOxnCcb_OJQ" http://localhost:8080/booklibrary/core/ANTONELLA/status`
 
 
-![Java CI](https://github.com/vincenzofiore/ex1-library/workflows/Java%20CI/badge.svg?branch=main)
