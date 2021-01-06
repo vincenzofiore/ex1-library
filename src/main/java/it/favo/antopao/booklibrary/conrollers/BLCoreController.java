@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import it.favo.antopao.booklibrary.dto.StatusEnum;
 import it.favo.antopao.booklibrary.dto.StatusResultDTO;
 import it.favo.antopao.booklibrary.dto.UserEnum;
@@ -18,6 +20,7 @@ public class BLCoreController {
 	
 	
 	@GetMapping("{user}/status")
+	@ApiOperation(value = "Just a joke", authorizations = { @Authorization(value = "Bearer") })
 	public StatusResultDTO getStatus(@PathVariable(name = "user") final UserEnum user) {
 		StatusResultDTO result = new StatusResultDTO();
 		Map<UserEnum, StatusEnum> statusMap = new EnumMap<>(UserEnum.class);

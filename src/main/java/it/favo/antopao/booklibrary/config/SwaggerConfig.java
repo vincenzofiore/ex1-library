@@ -1,5 +1,7 @@
 package it.favo.antopao.booklibrary.config;
 
+import static java.util.Collections.singletonList;
+
 import java.util.ArrayList;
 
 import org.springframework.context.annotation.Bean;
@@ -9,6 +11,7 @@ import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
+import springfox.documentation.service.HttpAuthenticationScheme;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -24,7 +27,8 @@ public class SwaggerConfig {
 				.apis(RequestHandlerSelectors.any())
 				.paths(PathSelectors.any())
 				.build()
-				.pathMapping("/").apiInfo(metaData());
+				.pathMapping("/").apiInfo(metaData())
+				.securitySchemes(singletonList(HttpAuthenticationScheme.JWT_BEARER_BUILDER.name("Bearer").build()));
 	}
 
 	private ApiInfo metaData() {
