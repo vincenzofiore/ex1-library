@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.favo.antopao.booklibrary.dto.ApplicationUserDTO;
-import it.favo.antopao.booklibrary.model.ApplicationUser;
-import it.favo.antopao.booklibrary.repositories.ApplicationUserRepository;
+import it.favo.antopao.booklibrary.model.User;
+import it.favo.antopao.booklibrary.repositories.UserRepository;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/booklibrary/users")
 public class UserController {
 
-	private final ApplicationUserRepository applicationUserRepository;
+	private final UserRepository applicationUserRepository;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	private final ModelMapper mapper;
 
-	public UserController(ApplicationUserRepository applicationUserRepository,
+	public UserController(UserRepository applicationUserRepository,
 			BCryptPasswordEncoder bCryptPasswordEncoder, ModelMapper mapper) {
 		this.applicationUserRepository = applicationUserRepository;
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -29,6 +29,6 @@ public class UserController {
 	@PostMapping("/sign-up")
 	public void signUp(@RequestBody ApplicationUserDTO user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		applicationUserRepository.save(mapper.map(user, ApplicationUser.class));
+		applicationUserRepository.save(mapper.map(user, User.class));
 	}
 }
