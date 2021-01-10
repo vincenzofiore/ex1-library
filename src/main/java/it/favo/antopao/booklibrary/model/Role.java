@@ -1,6 +1,6 @@
 package it.favo.antopao.booklibrary.model;
 
-import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,11 +20,14 @@ public class Role {
 	private String name;
 
 	@ManyToMany(mappedBy = "roles")
-	private Collection<User> users;
+	private Set<User> users;
 
 	@ManyToMany
-	@JoinTable(name = "roles_privileges", joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "privilege_id", referencedColumnName = "id"))
-	private Collection<Privilege> privileges;
+	@JoinTable( //
+			name = "role_privilege", //
+			joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"), //
+			inverseJoinColumns = @JoinColumn(name = "privilege_id", referencedColumnName = "id"))
+	private Set<Privilege> privileges;
 
 	public Long getId() {
 		return id;
@@ -42,19 +45,19 @@ public class Role {
 		this.name = name;
 	}
 
-	public Collection<User> getUsers() {
+	public Set<User> getUsers() {
 		return users;
 	}
 
-	public void setUsers(Collection<User> users) {
+	public void setUsers(Set<User> users) {
 		this.users = users;
 	}
 
-	public Collection<Privilege> getPrivileges() {
+	public Set<Privilege> getPrivileges() {
 		return privileges;
 	}
 
-	public void setPrivileges(Collection<Privilege> privileges) {
+	public void setPrivileges(Set<Privilege> privileges) {
 		this.privileges = privileges;
 	}
 }
