@@ -25,7 +25,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import it.favo.antopao.booklibrary.dto.ApplicationUserDTO;
+import it.favo.antopao.booklibrary.dto.UserDTO;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	private AuthenticationManager authenticationManager;
@@ -37,7 +37,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res) {
 		try {
-			ApplicationUserDTO creds = new ObjectMapper().readValue(req.getInputStream(), ApplicationUserDTO.class);
+			UserDTO creds = new ObjectMapper().readValue(req.getInputStream(), UserDTO.class);
 
 			return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(creds.getUsername(),
 					creds.getPassword(), new ArrayList<>()));

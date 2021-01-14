@@ -8,9 +8,9 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import it.favo.antopao.booklibrary.model.Person;
+import it.favo.antopao.booklibrary.model.Member;
 
-class PersonTest {
+class MemberTest {
 	
 	@BeforeEach
 	void setUp() {
@@ -20,8 +20,8 @@ class PersonTest {
 	@Test
 	void testPerson() throws Exception {
 		//given
-		Person borrower = new Person();
-		Set<Person> borrowers = new HashSet<>();
+		Member borrower = new Member();
+		Set<Member> borrowers = new HashSet<>();
 		
 		//when
 		borrowers.add(borrower);
