@@ -3,6 +3,7 @@ package it.favo.antopao.booklibrary.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -33,6 +35,9 @@ public class User {
 	private boolean enabled;
 
 	private boolean tokenExpired;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	private Member member;
 
 	@ManyToMany
 	@JoinTable( //
@@ -111,6 +116,14 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
 }
