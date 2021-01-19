@@ -27,6 +27,9 @@ public class Member {
 	private String email;
 	private String address;
 
+	@OneToMany(mappedBy = "member")
+	private Set<Shelf> shelf;
+
 	@ManyToMany(mappedBy = "owner")
 	private Set<Volume> volume;
 
@@ -145,6 +148,39 @@ public class Member {
 	 */
 	public void setNote(String note) {
 		this.note = note;
+	}
+
+
+	public Set<Volume> getVolume() {
+		return volume;
+	}
+
+	public void setVolume(Set<Volume> volume) {
+		this.volume = volume;
+	}
+
+	public Set<Loan> getOutLoan() {
+		return outLoan;
+	}
+
+	public void setOutLoan(Set<Loan> outLoan) {
+		this.outLoan = outLoan;
+	}
+
+	public Set<Loan> getInLoan() {
+		return inLoan;
+	}
+
+	public void setInLoan(Set<Loan> inLoan) {
+		this.inLoan = inLoan;
+	}
+
+	public Set<Shelf> getShelf() {
+		return shelf;
+	}
+
+	public void setShelf(Set<Shelf> shelf) {
+		this.shelf = shelf;
 	}
 	
 	

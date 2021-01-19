@@ -29,6 +29,9 @@ public class Volume {
 	@OneToOne
 	private Member owner;
 
+	@ManyToOne
+	private Shelf shelf;
+
 	@OneToMany(mappedBy = "volume")
 	private Set<Loan> loan;
 
@@ -100,6 +103,15 @@ public class Volume {
 
 	public void setLoan(Set<Loan> loan) {
 		this.loan = loan;
+
+	}
+
+	public Shelf getShelf() {
+		return shelf;
+	}
+
+	public void setShelf(Shelf shelf) {
+		this.shelf = shelf;
 	}
 
 
