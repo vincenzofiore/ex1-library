@@ -20,6 +20,7 @@
 		<springfox-swagger.version>3.0.0</springfox-swagger.version>
 		<modelmapper.version>2.3.9</modelmapper.version>
 		<java.jwt.version>3.12.0</java.jwt.version>
+		<jasypt.version>3.0.3</jasypt.version>
 	</properties>
 
 	<dependencies>
@@ -93,6 +94,12 @@
 		    <groupId>com.auth0</groupId>
 		    <artifactId>java-jwt</artifactId>
 		    <version>${java.jwt.version}</version>
+		</dependency>
+		
+		<dependency>
+    		<groupId>com.github.ulisesbocchio</groupId>
+    		<artifactId>jasypt-spring-boot-starter</artifactId>
+    		<version>${jasypt.version}</version>
 		</dependency>
 	</dependencies>
 
