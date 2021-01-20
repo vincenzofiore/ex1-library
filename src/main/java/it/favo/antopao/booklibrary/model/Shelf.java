@@ -5,6 +5,7 @@ package it.favo.antopao.booklibrary.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,8 +28,9 @@ public class Shelf {
 	private String shelf_name;
 	private Long shelf_address;
 
-	@ManyToOne
-	private Member member;
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Member owner;
+
 
 	@OneToMany(mappedBy = "shelf")
 	private Set<Volume> volume;
@@ -59,14 +61,6 @@ public class Shelf {
 		this.shelf_address = shelf_address;
 	}
 
-	public Member getMember() {
-		return member;
-	}
-
-	public void setMember(Member member) {
-		this.member = member;
-	}
-
 	public Long getNotes() {
 		return notes;
 	}
@@ -81,6 +75,14 @@ public class Shelf {
 
 	public void setVolume(Set<Volume> volume) {
 		this.volume = volume;
+	}
+
+	public Member getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Member owner) {
+		this.owner = owner;
 	}
 
 	}
