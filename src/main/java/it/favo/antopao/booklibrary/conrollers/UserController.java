@@ -17,7 +17,7 @@ import it.favo.antopao.booklibrary.repositories.RoleRepository;
 import it.favo.antopao.booklibrary.repositories.UserRepository;
 
 @RestController
-@RequestMapping("/booklibrary/users")
+@RequestMapping("/users")
 public class UserController {
 
 	private static final String USER_ROLE = "USER_ROLE";
