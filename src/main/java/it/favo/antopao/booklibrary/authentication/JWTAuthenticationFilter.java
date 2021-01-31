@@ -3,7 +3,6 @@ package it.favo.antopao.booklibrary.authentication;
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static it.favo.antopao.booklibrary.authentication.SecurityConstants.EXPIRATION_TIME;
 import static it.favo.antopao.booklibrary.authentication.SecurityConstants.HEADER_STRING;
-import static it.favo.antopao.booklibrary.authentication.SecurityConstants.SECRET;
 import static it.favo.antopao.booklibrary.authentication.SecurityConstants.TOKEN_PREFIX;
 
 import java.io.IOException;
@@ -28,17 +27,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import it.favo.antopao.booklibrary.dto.UserDTO;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+
+	private final String jwtSecret;
+
 	private AuthenticationManager authenticationManager;
 
-	public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
+	public JWTAuthenticationFilter(AuthenticationManager authenticationManager, String jwtSecret) {
 		this.authenticationManager = authenticationManager;
+		this.jwtSecret = jwtSecret;
 	}
 
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res) {
 		try {
 			UserDTO creds = new ObjectMapper().readValue(req.getInputStream(), UserDTO.class);
-
 			return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(creds.getUsername(),
 					creds.getPassword(), new ArrayList<>()));
 		} catch (IOException e) {
@@ -50,8 +52,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain,
 			Authentication auth) throws IOException, ServletException {
 
-		String token = JWT.create().withSubject(((User) auth.getPrincipal()).getUsername())
-				.withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME)).sign(HMAC512(SECRET.getBytes()));
+		String token = JWT.create() //
+				.withSubject(((User) auth.getPrincipal()).getUsername()) //
+				.withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME)) //
+				.sign(HMAC512(jwtSecret.getBytes()));
 		res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
 	}
 }

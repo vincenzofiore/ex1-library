@@ -2,7 +2,6 @@ package it.favo.antopao.booklibrary.authentication;
 
 
 import static it.favo.antopao.booklibrary.authentication.SecurityConstants.HEADER_STRING;
-import static it.favo.antopao.booklibrary.authentication.SecurityConstants.SECRET;
 import static it.favo.antopao.booklibrary.authentication.SecurityConstants.TOKEN_PREFIX;
 
 import java.io.IOException;
@@ -23,8 +22,11 @@ import com.auth0.jwt.algorithms.Algorithm;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
-	public JWTAuthorizationFilter(AuthenticationManager authManager) {
+	private final String jwtSecret;
+
+	public JWTAuthorizationFilter(AuthenticationManager authManager, String jwtSecret) {
 		super(authManager);
+		this.jwtSecret = jwtSecret;
 	}
 
 	@Override
@@ -47,7 +49,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 		String token = request.getHeader(HEADER_STRING);
 		if (token != null) {
 			// parse the token.
-			String user = JWT.require(Algorithm.HMAC512(SECRET.getBytes())).build()
+			String user = JWT.require(Algorithm.HMAC512(jwtSecret.getBytes())).build()
 					.verify(token.replace(TOKEN_PREFIX, "")).getSubject();
 
 			if (user != null) {

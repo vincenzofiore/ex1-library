@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import it.favo.antopao.booklibrary.model.Privilege;
 import it.favo.antopao.booklibrary.model.Role;
@@ -26,6 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
 	@Override
+	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = applicationUserRepository.findByUsername(username);
 		if (user == null) {
@@ -46,7 +48,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	}
 
 	private List<String> getPrivileges(Collection<Role> roles) {
-
 		List<String> privileges = new ArrayList<>();
 		List<Privilege> collection = new ArrayList<>();
 		for (Role role : roles) {

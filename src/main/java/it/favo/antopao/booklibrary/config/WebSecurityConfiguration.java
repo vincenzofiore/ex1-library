@@ -3,6 +3,7 @@ package it.favo.antopao.booklibrary.config;
 
 import static it.favo.antopao.booklibrary.authentication.SecurityConstants.SIGN_UP_URL;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -22,6 +23,9 @@ import it.favo.antopao.booklibrary.services.UserDetailsServiceImpl;
 
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+	@Value("${jwt.secret}")
+	private String jwtSecret;
 	private final UserDetailsServiceImpl userDetailsService;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -32,14 +36,18 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().and().csrf().disable().authorizeRequests()
+		http.cors().and().csrf().disable() //
+				.authorizeRequests() //
 				.antMatchers(HttpMethod.POST, SIGN_UP_URL) //
 				.permitAll() //
 				.anyRequest() //
 				.authenticated() //
 				.and() //
-				.addFilter(new JWTAuthenticationFilter(authenticationManager())) //
-				.addFilter(new JWTAuthorizationFilter(authenticationManager()))
+//				.formLogin() //
+//				.permitAll() //
+//				.and() //
+				.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtSecret)) //
+				.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtSecret))
 				// this disables session creation on Spring Security
 				.sessionManagement() //
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -49,7 +57,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/v3/api-docs", "/configuration/ui", "/swagger-resources/**", "/swagger-ui/**",
 				"/index.html", "/configuration/**", "/webjars/**");
-
 	}
 
 	@Override

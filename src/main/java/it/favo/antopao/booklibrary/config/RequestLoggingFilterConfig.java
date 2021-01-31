@@ -1,0 +1,30 @@
+package it.favo.antopao.booklibrary.config;
+
+import java.util.function.Predicate;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.filter.CommonsRequestLoggingFilter;
+
+import it.favo.antopao.booklibrary.authentication.SecurityConstants;
+
+/**
+ * @author Vincenzo Fiore
+ */
+
+@Configuration
+public class RequestLoggingFilterConfig {
+
+	@Bean
+	public CommonsRequestLoggingFilter logFilter() {
+		CommonsRequestLoggingFilter filter = new CommonsRequestLoggingFilter();
+		filter.setIncludeQueryString(true);
+		filter.setIncludePayload(true);
+		filter.setMaxPayloadLength(10000);
+		filter.setIncludeHeaders(true);
+		filter.setHeaderPredicate(Predicate.isEqual(SecurityConstants.HEADER_STRING.toLowerCase())); //
+//				.or(Predicate.isEqual(SecurityConstants.HEADER_STRING.toLowerCase())));
+		filter.setAfterMessagePrefix("REQUEST DATA : ");
+		return filter;
+	}
+}
