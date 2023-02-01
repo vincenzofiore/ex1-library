@@ -15,12 +15,12 @@ public class SecurityConfig {
 	private String jasyptPassword;
 
 	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+	BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	
 	@Bean("jasyptStringEncryptor")
-    public StringEncryptor stringEncryptor() {
+	StringEncryptor stringEncryptor() {
         PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
         SimpleStringPBEConfig config = new SimpleStringPBEConfig();
 		config.setPassword(jasyptPassword);

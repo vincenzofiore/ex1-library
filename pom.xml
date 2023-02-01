@@ -115,6 +115,12 @@
     		<artifactId>jasypt-spring-boot-starter</artifactId>
     		<version>${jasypt.version}</version>
 		</dependency>
+		<!-- TEST -->
+ 		<dependency>
+ 			<groupId>com.h2database</groupId> 
+ 			<artifactId>h2</artifactId> 
+ 			<scope>test</scope> 
+ 		</dependency> 
 	</dependencies>
 
 	<build>
