@@ -23,3 +23,6 @@ In the response header you will find the token that allows you to use the other 
 Now you can use the Bearer:
 
 `curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMCIsImV4cCI6MTYxMDQ3NDk1N30.p1a3HmThHsgfTdo9XIPOULqB4PL9Xxc27W54pAmGSJb_rbtTp7qWYDAX_ltY7_IAbAYNu_aF5qcKOxnCcb_OJQ" http://localhost:8080/booklibrary/core/ANTONELLA/status`
+
+
+commit to be amended
